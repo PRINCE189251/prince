@@ -1,0 +1,23 @@
+{
+  "name": "ai-hub",
+  "private": true,
+  "version": "0.1.0",
+  "license": "MIT",
+  "workspaces": [
+    "frontend",
+    "backend"
+  ],
+  "scripts": {
+    "dev": "concurrently \"pnpm --filter backend dev\" \"pnpm --filter frontend dev\"",
+    "start": "pnpm --filter backend start",
+    "build": "pnpm --filter frontend build && pnpm --filter backend build",
+    "lint": "eslint . --ext .ts,.tsx,.js,.jsx",
+    "format": "prettier --write ."
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.1",
+    "eslint": "^8.49.0",
+    "prettier": "^2.9.0",
+    "pnpm": "^8.0.0"
+  }
+}

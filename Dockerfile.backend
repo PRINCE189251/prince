@@ -1,0 +1,14 @@
+FROM node:18-alpine
+
+WORKDIR /usr/src/app
+
+COPY backend/package.json backend/pnpm-lock.yaml ./
+RUN npm install -g pnpm && pnpm install --filter backend --frozen-lockfile
+
+COPY backend ./backend
+
+RUN pnpm --filter backend build
+
+EXPOSE 4000
+
+CMD ["node", "backend/dist/index.js"]

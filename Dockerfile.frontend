@@ -1,0 +1,14 @@
+FROM node:18-alpine
+
+WORKDIR /usr/src/app
+
+COPY frontend/package.json frontend/pnpm-lock.yaml ./
+RUN npm install -g pnpm && pnpm install --filter frontend --frozen-lockfile
+
+COPY frontend ./frontend
+
+RUN pnpm --filter frontend build
+
+EXPOSE 3000
+
+CMD ["pnpm", "--filter", "frontend", "preview"]
